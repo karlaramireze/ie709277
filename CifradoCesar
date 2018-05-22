@@ -13,6 +13,10 @@ int main(void) {
 	for (i=0 ; i<strlen(s) ; i++){
 		if ((s[i]>=97 && s[i]<=122) || (s[i]>=65 && s[i]<=90))
 			s[i]+=a;
+		else if (s[i]==90)
+			s[i]=65;
+		else if (s[i]==122)
+			s[i]=97;
 	}
 
 	printf("%s",s);
