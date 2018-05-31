@@ -1,6 +1,17 @@
+/*
+ ============================================================================
+ Name        : Tarea01Verano.c
+ Author      : Karla Ramirez
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Tarea01
+ ============================================================================
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define N 40
 
 typedef struct{
 	char nombre[15];
@@ -8,54 +19,77 @@ typedef struct{
 } Profesor;
 
 
-//float averageArray(Profesor   , int ); //De los repetidos, hace un promedio
+float averageArray(Profesor *profe3 , int n){ //De los repetidos, hace un promedio
+	int i,j;
+	float aux;
+	for (i=0; i<n; i++){
+		for (j=n-1; j>=0; j--){
+			if (profe3[i].nombre == profe3[j].nombre)
+				aux= (profe3[i].calificacion+profe3[j].calificacion)/2;
+			else
+				aux= profe3[i].calificacion;
+
+		}
+	}
+	return aux;
+}
 
 void readArray(Profesor *profe1, int *pN){
 	int i;
 	scanf("%d",pN);
 	for (i=0; i< (*pN); i++){
-		scanf("%s", (profe1->nombre)+i);
-		scanf("%f", (profe1->calificacion)+i); //PREGUNTAR QUE PASA
+		scanf("%s", profe1[i].nombre);
+		scanf("%f", &profe1[i].calificacion);
 	}
+
 }
 
 void printArray(Profesor * profe1, int n){
 	int i;
+
 	for(i=0; i<n; i++){
-		printf("%s\n", (profe1->nombre)+i); //Marca error en la asignación
-		printf("%f\n", (profe1->calificacion)+i);
+		printf("%s\n", profe1->nombre);
+		printf("%.2f\n", profe1->calificacion);
 	}
 }
 
-void mergeArrays(Profesor *profe1, int *a,Profesor *profe2, int *b, Profesor *profe3, int *c){
+void mergeArrays(Profesor *profe1, int *a,Profesor *profe2, int *b, Profesor *profe3, int c){
 	int i,j;
 	for (i=0; i<(*a); i++){
-		(profe3[i].nombre) = (profe1[i].nombre); //Marca error en la asignación
-		(profe3[i].calificacion) = (profe1[i].calificacion);
+		strcpy(profe3[i].nombre, profe1[i].nombre);
+		profe3[i].calificacion = profe1[i].calificacion;
 	}
 
-	for (j= (*a); j<(*c); j++){
-		(profe3[j].nombre) = (profe2[j].nombre);
-		(profe3[j].calificacion) = (profe2[j].calificacion);
+	for (j= (*a); j<c; j++){
+		strcpy(profe3[j].nombre, profe2[j].nombre);
+		profe3[j].calificacion=  profe2[j].calificacion;
 	}
 }
 
-void sortArray(Profesor *profe3, int *a){
-	
+void sortArray(Profesor *profe3, int a){
+	Profesor arr; //Arreglo auxiliar
+	int i;
+	for (i=0; i<(a); i++){
+		if (profe3[i].calificacion > profe3[i+1].calificacion){
+			arr= profe3[i];
+			strcpy(profe3[i].nombre, profe3[i+1].nombre); //Variable destino, Variable a copiar
+			profe3[i].calificacion = profe3[i+1].calificacion;
+			profe3[i+1]=arr;
+		}
+	}
 }
 
 
-
-int main(){
+int main(void){
 	Profesor arr1[20];  //Primer arreglo
 	Profesor arr2[20];  //Segundo arreglo
 	Profesor arrF[40];  //Arreglo final, con elementos fusionados y ordenados
 	int n1, n2; //Longitud de los arreglos
 	readArray(arr1, &n1); //Leer el primer arreglo
 	readArray(arr2, &n2); //Leer el segundo arreglo
-	mergeArrays(arr1, &n1, arr2, &n2, arrF, 40);  //Fusionar los dos arreglos en un tercer arreglo
-	sortArray(arrF, 40);  //Ordenar los elementos del tercer arreglo, recuerde que pueden existir profesores repetidos
-	printArray(arrF, 40);   //Imprimir el resultado final
+	mergeArrays(arr1, &n1, arr2, &n2, arrF, N);  //Fusionar los dos arreglos en un tercer arreglo
+	sortArray(arrF, N);  //Ordenar los elementos del tercer arreglo, recuerde que pueden existir profesores repetidos
+	printArray(arrF, N);   //Imprimir el resultado final
 
 return 0;
 }
