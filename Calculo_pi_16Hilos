@@ -127,7 +127,7 @@ int main()
    pthread_t h15;
    
    double sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8, sum9;
-   double sum10, sum11, sum12, sum13, sum14, sum15, sum16, sum17, hilo1;
+   double sum10, sum11, sum12, sum13, sum14, sum15, hilo1;
    clock_t start= clock();
    
    pthread_create(&h1, NULL, Suma1, &sum1);
