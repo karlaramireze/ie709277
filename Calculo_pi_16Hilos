@@ -1,0 +1,179 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <time.h>
+#define N 50000000000
+
+void Suma1(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=1; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma2(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=3; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma3(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=5; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma4(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=7; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma5(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=9; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma6(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=11; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma7(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=13; i<N; i+=16)
+    *sum+=1/(float)i;
+}
+
+void Suma8(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=1; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma9(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=3; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma10(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=5; i<N; i+=16)
+    *sum+=1/(float)i;
+}
+
+void Suma11(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=7; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma12(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=9; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma13(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=11; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma14(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=13; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+void Suma15(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=13; i<N; i+=32)
+    *sum+=1/(float)i;
+}
+
+int main()
+{
+   pthread_t h1;
+   pthread_t h2;
+   pthread_t h3;
+   pthread_t h4;
+   pthread_t h5;
+   pthread_t h6;
+   pthread_t h7;
+   pthread_t h8;
+   pthread_t h9;
+   pthread_t h10;
+   pthread_t h11;
+   pthread_t h12;
+   pthread_t h13;
+   pthread_t h14;
+   pthread_t h15;
+   
+   double sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8, sum9;
+   double sum10, sum11, sum12, sum13, sum14, sum15, sum16, sum17, hilo1;
+   clock_t start= clock();
+   
+   pthread_create(&h1, NULL, Suma1, &sum1);
+   pthread_create(&h2, NULL, Suma2, &sum2);
+   pthread_create(&h3, NULL, Suma3, &sum3);
+   pthread_create(&h4, NULL, Suma4, &sum4);
+   pthread_create(&h5, NULL, Suma5, &sum5);
+   pthread_create(&h6, NULL, Suma6, &sum6);
+   pthread_create(&h7, NULL, Suma7, &sum7);
+   pthread_create(&h8, NULL, Suma1, &sum8);
+   pthread_create(&h9, NULL, Suma2, &sum9);
+   pthread_create(&h10, NULL, Suma3, &sum10);
+   pthread_create(&h11, NULL, Suma4, &sum11);
+   pthread_create(&h12, NULL, Suma5, &sum12);
+   pthread_create(&h13, NULL, Suma6, &sum13);
+   pthread_create(&h14, NULL, Suma7, &sum14);
+   pthread_create(&h15, NULL, Suma7, &sum15);
+   
+   int i; 
+   for (i=31; i<N; i+=32)
+    hilo1+= 1/(float)i;
+    
+    pthread_join(h1, NULL);
+    pthread_join(h2, NULL);
+    pthread_join(h3, NULL);
+    pthread_join(h4, NULL);
+    pthread_join(h5, NULL);
+    pthread_join(h6, NULL);
+    pthread_join(h7, NULL);
+    pthread_join(h8, NULL);
+    pthread_join(h9, NULL);
+    pthread_join(h10, NULL);
+    pthread_join(h11, NULL);
+    pthread_join(h12, NULL);
+    pthread_join(h13, NULL);
+    pthread_join(h14, NULL);
+    pthread_join(h15, NULL);
+    
+    clock_t stop=  clock();
+    int ms= 1000* (stop-start)/CLOCKS_PER_SEC;
+    
+    double pi= (sum1-sum2+sum3-sum4+sum5-sum6+sum7-sum8+sum9-sum10+sum11-sum12+sum13-sum14+sum15-hilo1);
+    double pi*=4;
+    
+    printf("Pi: %1.10lf\n", pi);
+    printf("%d ms", ms);
+
+    return 0;
+}
