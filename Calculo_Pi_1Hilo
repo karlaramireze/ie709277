@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define N 50000000000
+
+int main(void) {
+	int i;
+	double denom=1, pi=0, sum;
+
+	//Se toma el tiempo de inicio
+	clock_t start= clock();
+
+	for (i=0; i<N; i++){
+		sum= 4/denom;
+		if (i%2 == 1) //Si es impar
+			pi-=sum;
+		else //si es par
+			pi+=sum;
+		denom+=2; //Los denominadores son impares, por lo tanto se suma de 2 en 2
+	}
+
+	printf("Pi= %.10lf\n", pi); //Impresion
+
+	clock_t stop= clock();
+	int ms=0;
+	ms= 1000*(stop-start)/CLOCKS_PER_SEC;
+
+	printf("%d ms",ms);
+
+	return 0;
+}
