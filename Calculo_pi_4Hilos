@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <time.h>
+#define N 50000000000
+
+void Suma1(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=1; i<N; i+=8)
+    *sum+=1/(float)i;
+}
+
+void Suma2(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=3; i<N; i+=8)
+    *sum+=1/(float)i;
+}
+
+void Suma3(void *arg){
+    double *sum= (double*) arg;
+    int i; 
+    for(i=5; i<N; i+=8)
+    *sum+=1/(float)i;
+}
+
+int main()
+{
+   pthread_t h1;
+   double sum1, sum2, sum3, hilo1;
+   clock_t start= clock();
+   pthread_create(&h1, NULL, Suma1, &sum1);
+   pthread_create(&h2, NULL, Suma2, &sum2);
+   pthread_create(&h3, NULL, Suma3, &sum3);
+   
+   int i; 
+   for (i=7; i<N; i+=8)
+    hilo1+= 1/(float)i;
+    
+    pthread_join(h1, NULL);
+    pthread_join(h2, NULL);
+    pthread_join(h3, NULL);
+    
+    clock_t stop=  clock();
+    int ms= 1000* (stop-start)/CLOCKS_PER_SEC;
+    
+    double pi= 4* (sum1-sum2+sum3-hilo1);
+    
+    printf("Pi: %1.10lf\n", pi);
+    printf("%d ms", ms);
+
+    return 0;
+}
