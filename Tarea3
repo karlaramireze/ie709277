@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct strFecha{
+	int d;
+	int m;
+	int y;
+};
+
+struct strCliente{
+	int id_usuario;
+	char nombre[10];
+	char am[20];
+	char ap[20];
+	struct strFecha fecha;
+};
+
+struct strCuenta{
+	int id_cuenta;
+	int id_usuario;
+	int saldo;
+	struct strFecha fecha_ap;
+};
+
+typedef struct strCuenta Cuenta;
+typedef struct strFecha Fecha;
+typedef struct strCliente Usuario;
+
+void printMenu();
+
+void menuCliente();
+	Usuario nuevoCliente();
+	Usuario buscarCliente();
+	Usuario eliminarCliente();
+	Usuario printCliente();
+
+void menuCuentas();
+void menuTransacciones();
+
+int main() {
+	printMenu();
+	return 0;
+}
+
+void printMenu(){
+
+	printf("<< Sistema MyDB \t>>");
+	printf("1.\t Clientes\n");
+	printf("2.\t Cuentas\n");
+	printf("3.\t Transacciones\n");
+	printf("4.\t Salir\n");
+	int a1;
+	scanf("%d", &a1);
+	switch(a1){
+	case 1:
+		menuCliente();
+		break;
+	case 2:
+		menuCuentas();
+		break;
+	case 3:
+		menuTransacciones();
+		break;
+	case 4:
+		break;
+	}
+}
+
+void menuCliente(){
+	Usuario *cliente;
+	int a;
+	printf("1. Nuevo Cliente\n");
+	printf("2. Buscar Cliente\n");
+	printf("3. Eliminar Cliente\n");
+	printf("4. Imprimir Clientes\n");
+	scanf("%d",&a);
+	switch(a){
+	case 1:
+		nuevoCliente();
+		break;
+	case 2:
+		buscarCliente(cliente, cliente->id_usuario);
+		break;
+	case 3:
+		eliminarCliente();
+		break;
+	case 4:
+		printCliente();
+		break;
+	}
+}
+
+Usuario nuevoCliente(){
+	Usuario *cliente1;
+	int id;
+	char nombre[10],am[10],ap[10];
+	Fecha fecha;
+	printf("Ingrese los datos del cliente: Id\n Nombre\n Apellido materno\n Apellido paterno\n Fecha separada por día, mes y año\n");
+	scanf("%d",&id);
+	scanf("%s",nombre);
+	scanf("%s",am);
+	scanf("%s",ap);
+	scanf("%d",&fecha.d);
+	scanf("%d",&fecha.m);
+	scanf("%d",&fecha.y);
+	do{
+		cliente1= (Usuario*)malloc(sizeof(struct strCliente));
+	}while(cliente1==NULL);
+
+	cliente1->id_usuario= id;
+	cliente1->nombre= nombre;
+	cliente1->am= am;
+	cliente1->ap= ap;
+	cliente1->fecha.d= fecha.d;
+	cliente1->fecha.m= fecha.m;
+	cliente1->fecha.y= fecha.y;
+
+	return *cliente1;
+}
+
+Usuario buscarCliente(Usuario *cliente1,int id){
+	if (cliente1->id_usuario == id){
+		printCliente(cliente1, id);
+	}
+}
+
+Usuario printCliente(Usuario *cliente1, int id){
+	printf("%d\n",cliente1->id_usuario);
+	printf("%s\n", cliente1->nombre);
+	printf("%s\n",cliente1->am);
+	printf("%s\n",cliente1->ap);
+	printf("%d\n",cliente1->fecha.d);
+	printf("%d\n",cliente1->fecha.m);
+	printf("%d\n",cliente1->fecha.y);
+}
+
+Usuario eliminarCliente(Usuario *cliente1, int id){
+	if (cliente1->id_usuario== id)
+		free(cliente1);
+}
+
+Cuenta nuevaCuenta(){
+	
+}
