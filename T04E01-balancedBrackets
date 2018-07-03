@@ -1,0 +1,25 @@
+/*
+ ============================================================================
+ Name        : Tarea4.c
+ Author      : Karla Ramírez
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Tarea04- Ejercicio1
+ ============================================================================
+ */
+
+#include "Stack.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(){
+	char a[20];
+	scanf("%s",a);
+	printf("Expresión aritmética a revisar: %s\n", a);
+
+	balancedBrackets(a);
+
+	return 0;
+}
+
