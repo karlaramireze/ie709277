@@ -1,0 +1,28 @@
+bool balancedBrackets(char *exp){
+	int i;
+	Stack s1;
+	s1= createStack();
+
+	for(i=0; i<strlen(exp); i++){
+
+		if(exp[i]== '(' || exp[i]=='[')
+			push(s1, &exp[i]);
+
+		if(exp[i]== ')' || exp[i]==']'){
+
+			if(isEmpty(s1) == true){
+				return false;
+			}
+
+			else if (pop(s1)!= exp){
+				return false;
+			}
+		}
+	}
+
+		if(isEmpty(s1)==true)
+			return true;
+		else
+			return false;
+
+}
