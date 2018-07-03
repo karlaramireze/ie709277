@@ -1,11 +1,3 @@
-/*
- * Stack.c
- *
- *  Created on: 02/07/2018
- *      Author: Usuario
- */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -76,27 +68,23 @@ bool balancedBrackets(char *exp){
 	Stack s1;
 	s1= createStack();
 	for(i=0; i<strlen(exp); i++){
-		//Si se encuentra un parEntesis o corchete que abre
-		//se hace push
 		if(exp[i]== '(' || exp[i]=='[')
 			push(s1, &exp[i]);
-
-		//Si se encuentra un parentesis o corchete que cierra
-		else if(exp[i]== ')' || exp[i]==']'){
-			//Si la pila estA vacIa significa que estA desbalanceado
-			//Se hace pop
-			if(isEmpty(s1) != 1){
-				pop(s1);
-				printf("True\n");
+		if(exp[i]== ')' || exp[i]==']'){
+			if(isEmpty(s1) == true){
+				printf("False\n");
 				return false;
 			}
-			else{
-				return true;
+			else if (pop(s1)!= exp){
 				printf("False\n");
+				return false;
 			}
-
 		}
 	}
+		if(isEmpty(s1)==true)
+			return true;
+		else
+			return false;
 }
 
 void destroyStack(Stack who){
