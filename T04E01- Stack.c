@@ -1,3 +1,11 @@
+/*
+ * Stack.c
+ *
+ *  Created on: 02/07/2018
+ *      Author: Usuario
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -77,12 +85,16 @@ bool balancedBrackets(char *exp){
 		else if(exp[i]== ')' || exp[i]==']'){
 			//Si la pila estA vacIa significa que estA desbalanceado
 			//Se hace pop
-			if(isEmpty(s1) != true){
+			if(isEmpty(s1) != 1){
 				pop(s1);
+				printf("True\n");
 				return false;
 			}
-			else
+			else{
 				return true;
+				printf("False\n");
+			}
+
 		}
 	}
 }
